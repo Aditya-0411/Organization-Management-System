@@ -33,6 +33,7 @@ class Repository(models.Model):
     def __str__(self):
         return self.name
 
+#MODEL FOR TEAM
 class Team(models.Model):
     repository = models.ForeignKey(Repository, related_name='teams', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
