@@ -54,6 +54,11 @@ class RegisterSerializer(serializers.ModelSerializer):
                 'delete_repository',
                 'change_repository',
             ],
+             'org.team':[
+                'view_team',
+
+            ]
+
 
 
         }
