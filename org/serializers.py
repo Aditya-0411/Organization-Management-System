@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Permission
-from .models import Repository,Team
+from .models import Repository,Team,Project
 from django.contrib.contenttypes.models import ContentType
 from .models import Organization
 
@@ -54,12 +54,18 @@ class RegisterSerializer(serializers.ModelSerializer):
                 'delete_repository',
                 'change_repository',
             ],
-             'org.team':[
+            'org.team':[
                 'view_team',
 
-            ]
 
+            ],
+            'org.project':[
+                'view_project',
+                'add_project',
+                'delete_project',
+                'change_project',
 
+            ],
 
         }
 
@@ -111,3 +117,9 @@ class TeamUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
         fields = ['id', 'name', 'description', 'repository', 'users']
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ['id', 'name', 'description', 'team', 'users', 'repository', 'created_at']

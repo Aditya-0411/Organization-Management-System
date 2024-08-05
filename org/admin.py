@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from org.models import Organization , Repository,Team
+from org.models import Organization , Repository,Team, Project
 
 class RepositoryInline(admin.TabularInline):
     model = Repository
@@ -33,6 +33,17 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'is_staff', 'is_active')
     list_filter = ('is_staff', 'is_active')
 
+
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'team', 'repository', 'created_at')
+    list_filter = ('team', 'repository')
+    search_fields = ('name', 'description')
+    filter_horizontal = ('users',)
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Team, TeamAdmin)
+admin.site.register(Project, ProjectAdmin)
+
+
+
